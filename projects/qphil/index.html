@@ -1,57 +1,133 @@
+<!-- Meta data -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>QPHIL</title>
-  <link rel="stylesheet" href="../../styles.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      line-height: 1.6;
-      color: #333;
-    }
-    header {
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 1rem;
-      margin-bottom: 2rem;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin: 0;
-    }
-    .authors {
-      font-size: 1rem;
-      color: #666;
-    }
-    nav a {
-      margin-right: 1rem;
-      text-decoration: none;
-      color: #007acc;
-    }
-    .section {
-      margin-top: 2rem;
-    }
-    code {
-      background: #f4f4f4;
-      padding: 0.2rem 0.4rem;
-      border-radius: 4px;
-    }
-  </style>
-</head>
-<body>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Quantizing Planner for Hierarchical Implicit Q-Learning.">
+  <meta name="keywords" content="QPHIL">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QPHIL: Quantizing Planner for Hierarchical Implicit Q-Learning</title>
 
-<header>
-  <h1>QPHIL: QUANTIZING PLANNER FOR HIERARCHICAL IMPLICIT Q-LEARNING</h1>
-  <p class="authors">Alexi Canesse, Mathieu Petitbois, Ludovic Denoyer, Sylvain Lamprier, Rémy Portelas</p>
-  <nav>
-    <a href="../../index.html">← Back to Main Site</a>
-    <!-- Add more links if needed -->
-  </nav>
-</header>
+<!-- Authors -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">QPHIL: Quantizing Planner for Hierarchical Implicit Q-Learning</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/alexi-c-477814208/">Alexi Canesse</a><sup>*,†,1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://mathieu-petitbois.github.io/">Mathieu Petitbois</a><sup>*,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/ludovic-denoyer-6414799?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAGrt1EBl5WwoOxoaFOhRnlvqXTIC8ctshU&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BRpvjmjmxSQe%2B8hgqFl52jQ%3D%3D">Ludovic Denoyer</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.google.fr/url?sa=t&source=web&rct=j&opi=89978449&url=https://fr.linkedin.com/in/sylvain-lamprier-99666a74&ved=2ahUKEwjjsOu0u9OMAxWjVKQEHawoPOwQFnoECC0QAQ&usg=AOvVaw2weKxSXSRBLWeaIsUu9EWF">Sylvain Lamprier</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/r%C3%A9my-portelas-669250135/?originalSubdomain=fr">Rémy Portelas</a><sup>2</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>ENS Lyon,</span>
+            <span class="author-block"><sup>2</sup>Ubisoft La Forge</span>
+            <span class="author-block"><sup>3</sup>H Company</span>
+            <span class="author-block"><sup>4</sup>University of Angers</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal contribution,</span>
+            <span class="author-block"><sup>†</sup>Work done during intership at Ubisoft La Forge</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://openreview.net/pdf?id=GLuZg4l8ms"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (comming soon)</span>
+                  </a>
+              </span>
+              
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Offline Reinforcement Learning (RL) has emerged as a powerful alternative to im-
+            itation learning for behavior modeling in various domains, particularly in complex
+            long range navigation tasks. An existing challenge with Offline RL is the signal-
+            to-noise ratio, i.e. how to mitigate incorrect policy updates due to errors in value
+            estimates. Towards this, multiple works have demonstrated the advantage of hier-
+            archical offline RL methods, which decouples high-level path planning from low-
+            level path following. In this work, we present a novel hierarchical transformer-
+            based approach leveraging a learned quantizer of the state space to tackle long
+            horizon navigation tasks. This quantization enables the training of a simpler
+            zone-conditioned low-level policy and simplifies planning, which is reduced to
+            discrete autoregressive prediction. Among other benefits, zone-level reasoning in
+            planning enables explicit trajectory stitching rather than implicit stitching based
+            on noisy value function estimates. By combining this transformer-based planner
+            with recent advancements in offline RL, our proposed approach achieves state-of-
+            the-art results in complex long-distance navigation environments.
+          </p>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            The source code of this website is borrowed from the<a href=" https://nerfies.github.io/">Nerfies</a> website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
