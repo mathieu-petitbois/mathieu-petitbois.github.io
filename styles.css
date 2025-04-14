@@ -1,85 +1,319 @@
+/* Basic Reset & Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
-    padding-bottom: 50px;
+    font-family: 'Poppins', sans-serif; /* Modern font */
+    line-height: 1.7;
+    background-color: #f8f9fa; /* Lighter background */
+    color: #343a40; /* Darker grey for text */
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Stack children vertically */
+    min-height: 100vh; /* Ensure body takes full viewport height */
 }
 
 .container {
-    width: 80%;
+    width: 85%;
     margin: 0 auto;
-    padding: 20px;
-    max-width: 800px;
+    padding: 20px 0; /* Vertical padding only */
+    max-width: 900px; /* Slightly wider max width */
 }
 
-header {
-    background: #333;
-    color: white;
-    text-align: center;
-    padding: 50px 0;
-}
-
-header h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-}
-
-header p {
-    font-size: 1.2em;
+main {
+    flex-grow: 1; /* Allow main content to expand and push footer down */
 }
 
 a {
-    color: #3498db;
+    color: #007bff; /* Standard blue link color */
     text-decoration: none;
+    transition: color 0.3s ease; /* Smooth transition */
 }
 
 a:hover {
-    text-decoration: underline;
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: none; /* Keep underline off by default */
 }
 
-section h2 {
+h1, h2, h3 {
+    font-weight: 600; /* Bolder headings */
+    margin-bottom: 15px;
+    color: #212529; /* Almost black for headings */
+}
+
+h2 {
     font-size: 2em;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6; /* Subtle separator */
+}
+
+h2 i { /* Icon styling in headings */
+    margin-right: 10px;
+    color: #007bff;
+}
+
+p {
+    margin-bottom: 15px;
 }
 
 ul {
     list-style-type: none;
-    text-align: center;
 }
 
-ul li {
-    margin: 10px 0;
+section {
+    padding: 40px 0; /* Vertical padding for sections */
+    margin-bottom: 20px;
 }
 
-footer {
-    background: #333;
-    color: white;
+/* Header */
+header {
+    background: #ffffff; /* White background */
+    color: #343a40;
     text-align: center;
-    padding: 20px 0;
+    padding: 40px 0 20px 0; /* More padding top */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    border-bottom: 1px solid #e9ecef;
+}
+
+header h1 {
+    font-size: 2.8em;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+header .tagline {
+    font-size: 1.2em;
+    color: #6c757d; /* Muted grey for tagline */
+    margin-bottom: 20px;
+}
+
+/* Navigation */
+nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    padding-top: 10px;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #495057;
+    font-weight: 600;
+    padding: 5px 0;
     position: relative;
-    bottom: 0;
-    width: 100%;
+    transition: color 0.3s ease;
 }
 
+nav ul li a:hover {
+    color: #007bff;
+}
+
+/* Optional: Add underline effect on hover for nav links */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #007bff;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+nav ul li a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+
+/* Profile Picture (Optional) */
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover; /* Ensure image covers the area */
+    margin-bottom: 20px;
+    border: 3px solid #e9ecef;
+}
+
+/* About Section */
+#about p {
+    text-align: justify; /* Justify text for a cleaner look */
+    font-size: 1.1em; /* Slightly larger font */
+}
+
+/* Projects & Publications List */
+.item-list li {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: box-shadow 0.3s ease;
+}
+
+.item-list li:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+}
+
+.item-list h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.item-list h3 a {
+    color: #343a40; /* Darker link color for project titles */
+}
+.item-list h3 a:hover {
+    color: #0056b3;
+}
+
+.project-description, .publication-details {
+    color: #6c757d; /* Grey text for descriptions */
+    margin-bottom: 10px;
+}
+
+.project-links a, .publication-links a {
+    margin-right: 15px;
+    font-size: 0.9em;
+    color: #007bff;
+}
+.project-links a i, .publication-links a i {
+    margin-right: 5px;
+}
+
+/* Contact Section */
+.contact-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between icons */
+}
+
+.contact-links li a {
+    display: inline-flex; /* Use flex for alignment */
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8em; /* Larger icons */
+    color: #6c757d; /* Grey icons */
+    width: 50px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    border-radius: 50%; /* Make it circular */
+    background-color: #e9ecef; /* Light background */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact-links li a:hover {
+    background-color: #007bff; /* Blue background on hover */
+    color: #ffffff; /* White icon on hover */
+}
+
+.contact-links li a span { /* Hide text visually, but keep for accessibility */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap; /* added line */
+    border: 0;
+}
+
+
+/* Footer */
+footer {
+    background: #343a40; /* Dark footer background */
+    color: #f8f9fa; /* Light text */
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 30px; /* Space above footer */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+footer p {
+    margin-bottom: 0;
+    font-size: 0.9em;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .container {
         width: 90%;
     }
 
     header h1 {
-        font-size: 2em;
+        font-size: 2.2em;
+    }
+    header .tagline {
+        font-size: 1.1em;
     }
 
-    section h2 {
+    h2 {
         font-size: 1.8em;
+    }
+
+    nav ul {
+        justify-content: space-around; /* Better spacing on small screens */
+    }
+    nav ul li {
+        margin: 5px 10px; /* Adjust nav spacing */
+    }
+
+    .contact-links {
+        gap: 15px;
+    }
+    .contact-links li a {
+        font-size: 1.6em;
+        width: 45px;
+        height: 45px;
     }
 }
 
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+     header .tagline {
+        font-size: 1em;
+    }
+    nav ul {
+        flex-direction: column; /* Stack nav links */
+        align-items: center;
+    }
+    nav ul li {
+        margin: 8px 0; /* Vertical spacing for stacked links */
+    }
+
+     h2 {
+        font-size: 1.6em;
+    }
+
+    .item-list li {
+        padding: 15px;
+    }
+    .item-list h3 {
+        font-size: 1.2em;
+    }
+
+    .contact-links li a {
+        font-size: 1.5em;
+        width: 40px;
+        height: 40px;
+    }
+}
