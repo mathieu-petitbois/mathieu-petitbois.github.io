@@ -147,7 +147,21 @@
         <h2 class="title is-3 has-text-centered">Method</h2>
         <div class="content has-text-justified">
           <p>
-            Our approach: \(a + b = c\)
+            Our approach, QPHIL (Quantized Prior for Hierarchical Imitation Learning - *adjust name as needed*), focuses on learning a controllable latent space $\mathcal{Z}$ that captures distinct behaviors present in an offline dataset $\mathcal{D} = \{ (\tau_i) \}$. We model the behavior using a latent variable $z$, sampled from a prior $p(z)$. The policy is then conditioned on this latent variable: $\pi_\theta(a | s, z)$.
+          </p>
+          <p>
+            Unlike methods that learn a continuous latent space, we employ a discrete, quantized latent space, potentially using techniques inspired by Vector Quantized Variational Autoencoders (VQ-VAE). This allows for more distinct separation between learned behaviors. The objective function involves reconstructing the demonstrated actions while ensuring the latent variable $z$ captures meaningful behavioral information. A possible objective could look like:
+          </p>
+          <p style="text-align: center;">
+          \[
+          \mathcal{L}(\theta, \phi) = \mathbb{E}_{\tau \sim \mathcal{D}} \mathbb{E}_{(s,a) \sim \tau} [-\log \pi_\theta(a | s, z)] + \beta D_{KL}(q_\phi(z | \tau) || p(z))
+          \]
+          </p>
+          <p>
+            Here, $q_\phi(z | \tau)$ is an inference network (encoder) that predicts the latent behavior $z$ given a trajectory $\tau$, $p(z)$ is the prior (e.g., uniform categorical), and $\beta$ is a weighting factor. The term $-\log \pi_\theta(a | s, z)$ represents the imitation learning loss. Temporal consistency is encouraged by inferring $z$ at the trajectory level using $q_\phi(z | \tau)$. Controllability is achieved by sampling a desired $z$ from the learned prior $p(z)$ or the posterior $q_\phi(z|\tau)$ during inference and using the policy $\pi_\theta(a|s, z)$.
+          </p>
+           <p>
+            For example, the diversity can be measured using the mutual information $I(Z; S, A)$, where we aim to maximize $H(Z) - H(Z|S, A)$.
            </p>
         </div>
       </div>
