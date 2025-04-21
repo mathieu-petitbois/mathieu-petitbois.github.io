@@ -25,6 +25,31 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+
+  <!-- KaTeX CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1tBCBNoMGekGkyvislIbZaRUJnDF" crossorigin="anonymous">
+  <!-- KaTeX JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneCkOSBPLC+MTAcrEuP" crossorigin="anonymous"></script>
+  <!-- KaTeX Auto-render extension -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+  <!-- Script to initialize KaTeX auto-rendering -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            // customised options
+            // • auto-render specific keys, e.g.:
+            delimiters: [
+                {left: '$$', right: '$$', display: true}, // Display mode math (block)
+                {left: '\\[', right: '\\]', display: true}, // Display mode math (block) - LaTeX standard
+                {left: '$', right: '$', display: false},  // Inline mode math
+                {left: '\\(', right: '\\)', display: false} // Inline mode math - LaTeX standard
+            ],
+            // • rendering keys, e.g.:
+            throwOnError : false // Don't halt rendering on error
+        });
+    });
+  </script>
+
 </head>
 <body>
 
@@ -115,6 +140,20 @@
       </div>
     </div>
     <!--/ Abstract. -->
+
+    <!-- Method Section -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Method</h2>
+        <div class="content has-text-justified">
+          <p>
+            Our approach: \(a + b = c\)
+           </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Method Section -->
+
   </div>
 </section>
 
