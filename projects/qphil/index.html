@@ -9,22 +9,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>QPHIL: Quantizing Planner for Hierarchical Implicit Q-Learning</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
-
+  <!-- Google fonts & Bulma CSS framework -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
 
+  <!-- KaTeX for fast client‑side LaTeX rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
+          onload="renderMathInElement(document.body, {delimiters:[{left:'$$', right:'$$', display:true},{left:'\\[', right:'\\]', display:true},{left:'$', right:'$', display:false},{left:'\\(', right:'\\)', display:false}]});"></script>
+
+  <!-- JS dependencies -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+
+   <!-- Quick utility styles (orange theme + responsive rows) -->
+   <style>
+    /* --------  Colour palette  -------- */
+    :root{
+      --orange:#d98200;
+      --orange-light:#fff4e5;
+      --orange-mid:#fdebd0;
+    }
+    .has-text-orange{color:var(--orange)!important;}
+    .has-bg-orange{background:var(--orange-light)!important;}
+    .border-orange{border:1px solid var(--orange)!important;}
+
+    /* --------  Generic flex rows  -------- */
+    .row-flex{display:flex;flex-wrap:wrap;gap:1rem;justify-content:flex-start}
+
+    /* Section‑1 figures (3 per row, fixed height so they never wrap) */
+    .row-flex.fig .item{flex:0 0 calc(33.333% - 1rem)}
+    .row-flex.fig .item img{width:100%;height:140px;object-fit:cover;}
+
+    /* Env images row (3 per row, smaller height) */
+    .row-flex.env .item{flex:0 0 calc(33.333% - 1rem)}
+    .row-flex.env .item img{width:100%;height:140px;object-fit:cover;}
+  </style>
 </head>
 <body>
 
@@ -128,6 +157,157 @@
   </div>
 </section>
 
+<!-- ===== 1. SCALING OFFLINE GCRL ===== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="box">
+      <h2 class="title is-4 mb-3">1.&nbsp;Scaling Offline GCRL to Long‑Range</h2>
+      <p><strong>Challenge:</strong> Learn a policy $\pi(a\mid s,g)$ from imperfect demonstrations $\mathcal{D}=\{\tau\}$ that reaches goal $g$ from state $s$ <em>offline</em>.</p>
+      <p><strong>Limits:</strong> Value‑based RL suffers from noisy estimates, especially for long horizons.</p>
+      <p><strong>Question:</strong> How can we reduce value‑function noise while keeping strong path‑following performance?</p>
+
+      <!-- three illustrations (now smaller and guaranteed one row) -->
+      <div class="row-flex fig mb-4">
+        <div class="item"><img src="include/block 1 - intro/qphil_1.png" alt="intro1"></div>
+        <div class="item"><img src="include/block 1 - intro/qphil_2.png" alt="intro2"></div>
+        <div class="item"><img src="include/block 1 - intro/qphil_3.png" alt="intro3"></div>
+      </div>
+
+      <p class="mb-2"><span class="has-text-orange has-text-weight-bold">QPHIL</span> learns discrete <em>landmarks</em> and leverages them to:</p>
+      <ul style="list-style:none;margin:0;padding:0;">
+        <li><span class="has-text-orange">&bull;</span>&nbsp;Simplify sub‑goal planning with discrete tokens.</li>
+        <li><span class="has-text-orange">&bull;</span>&nbsp;Avoid noisy high‑frequency sub‑goal updates.</li>
+        <li><span class="has-text-orange">&bull;</span>&nbsp;Relax conditioning from sub‑goals to landmarks.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2. ARCHITECTURE & INFERENCE ===== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="box">
+      <h2 class="title is-4 mb-4">2.&nbsp;QPHIL: Architecture &amp; Inference</h2>
+      <div class="columns is-vcentered">
+        <div class="column is-5"><figure class="image"><img src="include/block 2 - inference/inference.png" alt="open loop"></figure><p class="has-text-centered is-size-7">Open‑loop inference pipeline</p></div>
+        <div class="column">
+          <div class="notification has-bg-orange border-orange">
+            <p class="has-text-weight-semibold mb-2 has-text-orange">QPHIL operates through four components:</p>
+            <div class="mb-2 p-2" style="background:var(--mid-orange);" class="border-orange"><strong>Quantizer:</strong> $q_{\theta_q}$ discretises states &amp; goals.</div>
+            <div class="mb-2 p-2" style="background:var(--mid-orange);" class="border-orange"><strong>Planner:</strong> $\pi^{p}_{\theta_p}$ predicts landmark plans.</div>
+            <div class="mb-2 p-2" style="background:var(--mid-orange);" class="border-orange"><strong>Landmark policy:</strong> $\pi^{\text{lm}}$ executes plans.</div>
+            <div class="p-2" style="background:var(--mid-orange);" class="border-orange"><strong>Goal policy:</strong> $\pi^{g}$ finalises within last landmark.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3. TRAINING & LOSSES ===== -->
+<section class="section" id="training">
+  <div class="container is-max-desktop">
+    <div class="box content">
+      <h2 class="title is-4 mb-4">3.&nbsp;QPHIL: Training &amp; Losses</h2>
+      <p><span class="has-text-orange has-text-weight-bold">QPHIL</span> components are trained sequentially:</p>
+
+      <!-- quantizer block -->
+      <div class="notification is-light mb-3" style="background:#fdebd0;border:1px solid #d98200;">
+        <p class="mb-2"><strong>Quantizer</strong> $q_{\theta_q}: \mathcal{S}^p \to \Omega$ with encoder $f^e_{\theta_e}$ and codebook $z$.</p>
+        <p class="is-size-7">Contrastive loss $\mathcal{L}_{\text{contrastive}}$ and VQ‑VAE loss $\mathcal{L}_{\text{VQ‑VAE}}$ combine into $\mathcal{L}_{\text{quantizer}}$.</p>
+      </div>
+
+      <!-- planner block -->
+      <div class="notification is-light mb-3" style="background:#fdebd0;border:1px solid #d98200;">
+        <p class="mb-2"><strong>Planner</strong> $\pi^{p}_{\theta_p}: \Omega_H \times \Omega \to \Omega_P$ minimises log‑likelihood loss $\mathcal{L}_{\text{planner}}$ over compact landmark sequences.</p>
+      </div>
+
+      <!-- policies block -->
+      <div class="notification is-light" style="background:#fdebd0;border:1px solid #d98200;">
+        <p><strong>Landmark policy</strong> $\pi^{\text{lm}}$ and <strong>Goal policy</strong> $\pi^{g}$ are learned with Implicit Q‑Learning (IQL).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. ENVIRONMENTS & DATASETS ===== -->
+<section class="section" id="envs-datasets">
+  <div class="container is-max-desktop">
+    <div class="box">
+      <h2 class="title is-4 mb-4">4.&nbsp;Environments &amp; Datasets</h2>
+      <p class="mb-3"><strong>Environments:</strong> <em>AntMaze</em> (Medium, Large, Ultra, Extreme)</p>
+
+      <!-- three images aligned, equal small height -->
+      <div class="row-flex env mb-4">
+        <div class="item"><img src="include/block 4 - envs/ant.png" alt="Ant robot"></div>
+        <div class="item"><img src="include/block 4 - envs/maps.png" alt="Maze maps"></div>
+        <div class="item"><img src="include/block 4 - envs/quantization.png" alt="Quantization"></div>
+      </div>
+
+      <p class="mb-2"><strong>Datasets:</strong> trajectories $\mathcal{D}$ of two types:</p>
+      <ul>
+        <li><span class="has-text-purple">Diverse:</span> random start / goal positions.</li>
+        <li><span class="has-text-link">Play:</span> curated start / goal positions.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5. KEY RESULTS ===== -->
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <div class="box">
+      <h2 class="title is-4 mb-4">5.&nbsp;Key Results</h2>
+      <p class="mb-3"><strong>QPHIL on AntMaze:</strong> scales with navigation range, matching SOTA on small mazes and <em>greatly</em> surpassing prior work on harder ones.</p>
+      <div class="table-container">
+        <!-- (original LaTeX table converted to HTML to preserve style) -->
+        <table class="table is-bordered is-narrow is-striped">
+          <thead>
+            <tr><th>Environment</th><th>GCBC</th><th>GCIQL</th><th>GCIVL</th><th>HGCBC<br>w/o repr</th><th>HGCBC<br>w/ repr</th><th>HIQL<br>w/o repr</th><th>HIQL<br>w/ repr</th><th>QPHIL</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>medium‑diverse</td><td>65±11</td><td>80±8</td><td>82±8</td><td>46±11</td><td>13±9</td><td>92±4</td><td>92±4</td><td>92±4</td></tr>
+            <tr><td>medium‑play</td>   <td>60±11</td><td>80±9</td><td>84±9</td><td>48±9</td><td>10±8</td><td>90±5</td><td>92±4</td><td>91±2</td></tr>
+            <tr><td>large‑diverse</td> <td>10±5</td><td>21±10</td><td>59±13</td><td>78±7</td><td>18±8</td><td>88±4</td><td>85±8</td><td>82±6</td></tr>
+            <tr><td>large‑play</td>    <td>9±5</td><td>25±12</td><td>50±9</td><td>79±7</td><td>14±13</td><td>87±7</td><td>84±7</td><td>80±3</td></tr>
+            <tr><td>ultra‑diverse</td> <td>16±9</td><td>20±8</td><td>6±5</td><td>71±12</td><td>32±24</td><td>71±7</td><td>71±12</td><td>62±7</td></tr>
+            <tr><td>ultra‑play</td>    <td>15±10</td><td>20±10</td><td>10±6</td><td>64±12</td><td>13±15</td><td>63±20</td><td>74±23</td><td>62±4</td></tr>
+            <tr><td>extreme‑diverse</td><td>9±6</td><td>12±7</td><td>5±10</td><td>6±14</td><td>0±4</td><td>14±17</td><td>20±20</td><td class="has-text-orange">40±13</td></tr>
+            <tr><td>extreme‑play</td>  <td>8±7</td><td>16±7</td><td>0±0</td><td>11±10</td><td>4±8</td><td>12±16</td><td>28±27</td><td class="has-text-orange">50±7</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6. ABLATIONS ===== -->
+<section class="section" id="ablations">
+  <div class="container is-max-desktop">
+    <div class="box content">
+      <h2 class="title is-4 mb-3">6.&nbsp;Ablations</h2>
+      <ul>
+        <li>Contrastive loss is crucial for good quantization <em>and</em> performance.</li>
+        <li>VQ‑VAE reconstruction loss eases hyper‑parameter tuning.</li>
+        <li>Success rate plateaus beyond a reasonable codebook size.</li>
+        <li>Out‑of‑distribution positions share landmarks with neighbours.</li>
+        <li>Under diverse initial states/goals, QPHIL still performs.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 7. CONCLUSION ===== -->
+<section class="section" id="conclusion">
+  <div class="container is-max-desktop">
+    <div class="box content">
+      <h2 class="title is-4 mb-3">7.&nbsp;Conclusion</h2>
+      <p><span class="has-text-orange has-text-weight-bold">QPHIL</span> leverages learned landmark representations to achieve state‑of‑the‑art long‑range planning on offline GCRL navigation benchmarks.</p>
+      <p><strong>Limits:</strong> Currently focused on navigation; may not transfer to more intricate planning domains.</p>
+      <p><strong>Future work:</strong> Scale landmark dimension, tackle higher‑dimensional problems, and exploit QPHIL’s interpretability.</p>
+    </div>
+  </div>
+</section>
 
 <footer class="footer">
   <div class="container">
