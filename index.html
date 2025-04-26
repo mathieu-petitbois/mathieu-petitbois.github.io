@@ -11,78 +11,106 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Add CSS for profile picture and layout below, or in styles.css -->
     <style>
+        /* --- Styles for Header Centering --- */
+        header > .container {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center;   /* Center items horizontally */
+            padding-bottom: 1rem;  /* Add some padding at the bottom if needed */
+        }
+
         .header-content {
-            display: flex;         /* Arrange items side-by-side */
+            display: flex;         /* Keep image and text side-by-side */
             align-items: center;   /* Vertically align items in the middle */
-            margin-bottom: 1rem;   /* Add some space below the name/pic before nav */
-            flex-wrap: wrap;       /* Allow items to wrap on smaller screens */
+            margin-bottom: 1.5rem; /* Space between name/pic block and nav */
+             /* Removed flex-wrap */
         }
         .profile-picture {
-            width: 150px;          /* <<< Increased width */
-            height: 150px;         /* <<< Increased height */
-            border-radius: 50%;    /* Make it circular */
-            object-fit: cover;     /* Ensure image covers the area well */
-            margin-right: 1.5rem;  /* Add space between picture and text */
-            flex-shrink: 0;        /* Prevent picture from shrinking too much */
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1.5rem;  /* Space between picture and text */
+            flex-shrink: 0;
         }
+
+        /* --- Removed centering styles from header-text --- */
+        .header-text {
+           /* No special alignment needed here now */
+        }
+
         .header-text h1 {
-            margin-bottom: 0.25rem; /* Reduce space below name */
+            margin-bottom: 0; /* Remove default bottom margin for h1 */
         }
-         .header-text p.tagline {
-             margin-top: 0; /* Remove default top margin */
-         }
 
         /* Style for the individual workshop tags */
         .workshop-tag {
             font-style: italic;
-            color: #555; /* Slightly muted color */
-            font-size: 0.9em; /* Slightly smaller font */
-            margin-top: 0.1rem; /* Space below the title */
-            margin-bottom: 0.5rem; /* Space above the description */
+            color: #555;
+            font-size: 0.9em;
+            margin-top: 0.1rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* Optional: Adjust project description spacing if needed */
         .project-description {
             margin-top: 0;
         }
 
-        /* Optional: Adjust publication heading bottom margin */
         #publications h3 {
-            margin-bottom: 0; /* Reduce default bottom margin if needed */
+            margin-bottom: 0;
         }
+
+         /* General Nav styling */
+         nav {
+             /* text-align: center; removed, handled by parent flex */
+             margin-top: 0; /* Adjust or remove if margin-bottom on header-content is sufficient */
+         }
+         nav ul {
+             padding-left: 0;
+             list-style: none;
+             margin: 0; /* Remove default ul margin */
+         }
+         nav li {
+             display: inline-block;
+             margin: 0 0.75rem;
+         }
 
 
         /* Optional: Adjust layout for smaller screens */
         @media (max-width: 600px) {
+            /* header > .container styles already handle stacking and centering */
+
             .header-content {
                 flex-direction: column; /* Stack image and text vertically */
-                align-items: flex-start; /* Align to the start */
-                text-align: left; /* Align text left */
+                align-items: center;   /* Center image and text when stacked */
+                text-align: center;    /* Ensure text itself is centered */
+                margin-bottom: 1rem; /* Adjust spacing */
             }
             .profile-picture {
                  margin-right: 0; /* Remove right margin */
                  margin-bottom: 1rem; /* Add bottom margin */
             }
-             nav ul {
-                 padding-left: 0; /* Remove default padding */
-                 text-align: center; /* Center nav links */
+             /* header-text centering handled by parent align-items and text-align */
+            .header-text {
+                 /* No specific rules needed here for centering */
              }
-              nav li {
-                  display: inline-block; /* Make nav links inline */
-                  margin: 0 0.5rem; /* Add horizontal spacing */
+
+             /* nav li margin might be adjusted for smaller screens if desired */
+             nav li {
+                  margin: 0 0.5rem; /* Slightly less space on small screens */
               }
         }
+
     </style>
 </head>
 <body>
+    <!-- Header structure remains the same -->
     <header>
         <div class="container">
             <div class="header-content">
-                <!-- IMPORTANT: Replace 'profile.jpg' with the actual path to your image file -->
                 <img src="include/1680542557512.jpg" alt="Photo of Mathieu Petitbois" class="profile-picture">
                 <div class="header-text">
                     <h1>Mathieu Petitbois</h1>
-                    <p class="tagline">Machine Learning PhD Student</p>
                 </div>
             </div>
             <nav>
@@ -96,6 +124,7 @@
         </div>
     </header>
 
+    <!-- Main content remains the same -->
     <main class="container">
         <section id="about">
             <h2><i class="fas fa-user"></i> About Me</h2>
@@ -109,21 +138,16 @@
             <ul class="item-list">
                 <li>
                     <h3><a href="projects/qphil/index.html">QPHIL: Quantizing Planner for Hierarchical Implicit Q-Learning</a></h3>
-                    <!-- IMPORTANT: Replace the placeholder text below -->
                     <p class="workshop-tag"><em>7th Robot Learning Workshop at ICLR 2025</em></p>
                     <p class="project-description">
-                        <!-- Optional: Add authors, short description, or leave empty -->
                     </p>
                 </li>
                 <li>
                     <h3><a href="projects/swr/index.html">Offline Learning of Controllable Diverse Behaviors</a></h3>
-                     <!-- IMPORTANT: Replace the placeholder text below -->
                     <p class="workshop-tag"><em>Generative Models for Robot Learning Workshop at ICLR 2025</em></p>
                     <p class="project-description">
-                        <!-- Optional: Add authors, short description, or leave empty -->
                     </p>
                 </li>
-                <!-- Add more publications following the same pattern -->
             </ul>
         </section>
 
@@ -137,6 +161,7 @@
         </section>
     </main>
 
+    <!-- Footer remains the same -->
     <footer>
         <div class="container">
             <p>© 2025 Mathieu Petitbois</p>
