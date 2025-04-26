@@ -124,15 +124,24 @@
               </span>
               <!-- Code Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="https://github.com/mathieu-petitbois/qphil"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code (comming soon)</span>
+                  <span>Code</span>
                   </a>
               </span>
-
+              <!-- Datasets & Models -->
+              <span class="link-block">
+                <a href="https://drive.google.com/drive/folders/1C_NwxC6ruLAnH01wDY1NhRNgmCKGVI_4?usp=sharing"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Datasets & Models</span>
+                  </a>
+              </span>
 
           </div>
         </div>
@@ -178,7 +187,7 @@
   <div class="container is-max-desktop">
     <div class="box">
       <h2 class="title is-4 mb-3">1. Scaling Offline GCRL to Long‑Range</h2>
-      <p><strong>Challenge:</strong> Learn a policy $\pi(a\mid s,g)$ from imperfect demonstrations $\mathcal{D}=\{\tau\}$ that reaches goal g$ from state s$ <em>offline</em>.</p>
+      <p><strong>Challenge:</strong> Learn a policy $\pi(a\mid s,g)$ from imperfect demonstrations $\mathcal{D}=\{\tau\}$ that reaches goal $g$ from state $s$ offline.</p>
       <p><strong>Limits:</strong> Value‑based RL suffers from noisy estimates, especially for long horizons.</p>
       <p><strong>Question:</strong> How can we reduce value‑function noise while keeping strong path‑following performance?</p>
 
@@ -211,8 +220,8 @@
             <p class="has-text-weight-semibold mb-2 has-text-orange">QPHIL operates through four components:</p>
             <div class="mb-2 p-2" style="background:var(--mid-orange);" class="border-orange"><strong>Quantizer:</strong> $q_{\theta_q}$ discretises states & goals.</div>
             <div class="mb-2 p-2" style="background:var(--mid-orange);" class="border-orange"><strong>Planner:</strong> $\pi^{p}_{\theta_p}$ predicts landmark plans.</div>
-            <div class="mb-2 p-2" style="background:var(--mid-orange);" class="border-orange"><strong>Landmark policy:</strong> $\pi^{\text{lm}}$ executes plans.</div>
-            <div class="p-2" style="background:var(--mid-orange);" class="border-orange"><strong>Goal policy:</strong> $\pi^{g}$ finalises within last landmark.</div>
+            <div class="mb-2 p-2" style="background:var(--mid-orange);" class="border-orange"><strong>Landmark policy:</strong> $\pi^{lm}_{\theta_{lm}}$ executes plans.</div>
+            <div class="p-2" style="background:var(--mid-orange);" class="border-orange"><strong>Goal policy:</strong> $\pi^{g}_{\theta_{g}}$ finalises within last landmark.</div>
           </div>
         </div>
       </div>
@@ -240,7 +249,7 @@
 
       <!-- policies block -->
       <div class="notification is-light" style="background:#fdebd0;border:1px solid #d98200;">
-        <p><strong>Landmark policy</strong> $\pi^{\text{lm}}$ and <strong>Goal policy</strong> $\pi^{g}$ are learned with Implicit Q‑Learning (IQL).</p>
+        <p><strong>Landmark policy</strong> $\pi^{\text{lm}}_{\theta_{lm}}$ and <strong>Goal policy</strong> $\pi^{g}_{\theta_{g}}$ are learned with Implicit Q‑Learning (IQL).</p>
       </div>
     </div>
   </div>
