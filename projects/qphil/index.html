@@ -238,13 +238,12 @@
 
       <!-- quantizer block -->
       <div class="notification is-light mb-3" style="background:#fdebd0;border:1px solid #d98200;">
-        <p class="mb-2"><strong>Quantizer</strong> $q_{\theta_q}: \mathcal{S}^p \to \Omega$ with encoder $f^e_{\theta_e}$ and codebook z$.</p>
-        <p class="is-size-7">Contrastive loss $\mathcal{L}_{\text{contrastive}}$ and VQ‑VAE loss $\mathcal{L}_{\text{VQ‑VAE}}$ combine into $\mathcal{L}_{\text{quantizer}}$.</p>
+        <p class="mb-2"><strong>Quantizer</strong> $q_{\theta_q}: \mathcal{S}^p \to \Omega$ with encoder $f^e_{\theta_e}$ and codebook $z$, learned by minimizing $\mathcal{L}_{\text{quantizer}}$, combination of Contrastive loss $\mathcal{L}_{\text{contrastive}}$ and VQ‑VAE loss $\mathcal{L}_{\text{VQ‑VAE}}$.</p>
       </div>
 
       <!-- planner block -->
       <div class="notification is-light mb-3" style="background:#fdebd0;border:1px solid #d98200;">
-        <p class="mb-2"><strong>Planner</strong> $\pi^{p}_{\theta_p}: \Omega_H \times \Omega \to \Omega_P$ minimises log‑likelihood loss $\mathcal{L}_{\text{planner}}$ over compact landmark sequences.</p>
+        <p class="mb-2"><strong>Planner</strong> $\pi^{p}_{\theta_p}: \Omega_H \times \Omega \to \Omega_P$, learned by minimizing the log‑likelihood loss $\mathcal{L}_{\text{planner}}$ over compact landmark sequences.</p>
       </div>
 
       <!-- policies block -->

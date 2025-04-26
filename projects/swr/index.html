@@ -28,6 +28,17 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+
+  <style>
+    /* Prevent KaTeX display equations from overflowing on narrow screens */
+    .katex-display {
+      overflow-x: auto;   /* Enable horizontal scrolling when content is too wide */
+      overflow-y: hidden;  /* Hide vertical scrollbar (usually not needed) */
+      padding-bottom: 5px; /* Optional: Add a little space below for the scrollbar */
+      max-width: 100%;   /* Ensure the container itself respects parent width */
+    }
+  </style>
+  
 </head>
 <body>
 
