@@ -307,6 +307,12 @@
             margin-bottom: 0;
         }
 
+        .role-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-heading);
+        }
+
         /* --- Contact --- */
         .contact-links {
             display: flex;
@@ -314,6 +320,7 @@
             list-style: none;
             padding: 0;
             font-size: 1.1rem;
+            flex-wrap: wrap;
         }
 
         .contact-links a {
@@ -478,11 +485,98 @@
             </div>
         </section>
 
+        <!-- EXPERIENCE SECTION -->
+        <section id="experience">
+            <h2><i class="fas fa-briefcase"></i> Experience</h2>
+
+            <div class="resume-block">
+                <div class="resume-header">
+                    <div class="resume-title">
+                        <a href="https://www.ubisoft.com/en-us/studio/laforge" target="_blank">Ubisoft La Forge</a>
+                    </div>
+                    <div class="resume-date">Apr. 2022 – May 2026</div>
+                </div>
+                <div class="resume-subtitle">Bordeaux, France</div>
+                <div class="resume-roles">
+                    <div class="role-item">
+                        <div class="resume-header">
+                            <div class="role-title">Research Assistant</div>
+                            <div class="resume-date">June 2023 – May 2026</div>
+                        </div>
+                        Developed and integrated generative models (Transformers, Diffusion, VAEs, VLMs) to bridge generative modeling and sequential decision-making in complex environments (Godot, Atari, MuJoCo, Newton Physics). Collaborated to integrate research outcomes into game development through scientific consulting, and presented findings at international conferences.
+                    </div>
+                    <div class="role-item">
+                        <div class="resume-header">
+                            <div class="role-title">Research Engineer</div>
+                            <div class="resume-date">Oct. 2022 – May 2023</div>
+                        </div>
+                        Designed and implemented a library to extract behavioral diversity from player data, enabling the learning of diverse, controllable policies for behavior personalization.
+                    </div>
+                    <div class="role-item">
+                        <div class="resume-header">
+                            <div class="role-title">Research Intern</div>
+                            <div class="resume-date">Apr. 2022 – Sep. 2022</div>
+                        </div>
+                        Implemented and evaluated offline and online RL methods in simulated environments using MuJoCo and Panda3D. Demonstrated that offline RL improves sample efficiency and reduces training time given sufficient data, contributing to a company-wide shift from online RL to data-driven offline RL for policy learning in games.
+                    </div>
+                </div>
+            </div>
+
+            <div class="resume-block">
+                <div class="resume-header">
+                    <div class="resume-title">
+                        <a href="https://u2is.ensta-paris.fr/" target="_blank">ENSTA Paris, U2IS</a>
+                    </div>
+                    <div class="resume-date">June 2021 – Aug. 2021</div>
+                </div>
+                <div class="resume-subtitle">Research Intern · Palaiseau, France</div>
+                <p style="margin: 0;">Reimplemented the model-based approach from the World Models paper (Ha &amp; Schmidhuber, NeurIPS 2018) in PyTorch.</p>
+            </div>
+        </section>
+
+        <!-- EDUCATION SECTION -->
+        <section id="education">
+            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+
+            <div class="resume-block">
+                <div class="resume-header">
+                    <div class="resume-title">
+                        <a href="https://leria-info.univ-angers.fr/" target="_blank">Ubisoft La Forge &amp; Université d'Angers, LERIA</a>
+                    </div>
+                    <div class="resume-date">June 2023 – May 2026</div>
+                </div>
+                <div class="resume-subtitle">PhD in Deep Reinforcement Learning for Stylized Behavior Modeling · Bordeaux &amp; Angers, France</div>
+                <p style="margin: 0;">Supervised by Ludovic Denoyer, Sylvain Lamprier, and Rémy Portelas.</p>
+            </div>
+
+            <div class="resume-block">
+                <div class="resume-header">
+                    <div class="resume-title">
+                        <a href="https://www.ip-paris.fr/en" target="_blank">Institut Polytechnique de Paris</a>
+                    </div>
+                    <div class="resume-date">Sep. 2021 – Sep. 2022</div>
+                </div>
+                <div class="resume-subtitle">M.Sc. in Data Science, Highest Honors · Palaiseau, France</div>
+                <p style="margin: 0;">Main courses: Deep Learning, Reinforcement Learning, Computer Vision.</p>
+            </div>
+
+            <div class="resume-block">
+                <div class="resume-header">
+                    <div class="resume-title">
+                        <a href="https://www.ensta-paris.fr/en" target="_blank">ENSTA Paris</a>
+                    </div>
+                    <div class="resume-date">Sep. 2019 – Sep. 2022</div>
+                </div>
+                <div class="resume-subtitle">Master's Degree in Engineering · Palaiseau, France</div>
+                <p style="margin: 0;">Main courses: Dynamic Programming, Logic Programming, Linear Programming, Genetic Algorithms, Probability Theory, Optimization, Applied Statistics, Statistical Learning, Control Theory, Bayesian Filtering.</p>
+            </div>
+        </section>
+
         <!-- CONTACT SECTION -->
         <section id="contact">
             <h2><i class="fas fa-envelope"></i> Get In Touch</h2>
             <ul class="contact-links">
-                <li><a href="mailto:mathieu.petitbois@ubisoft.com"><i class="fas fa-envelope"></i> mathieu.petitbois@ubisoft.com</a></li>
+                <li><a href="mailto:mathieupetitboispt@gmail.com"><i class="fas fa-envelope"></i> mathieupetitboispt@gmail.com</a></li>
                 <li><a href="include/CV.pdf" target="_blank"><i class="fas fa-file-pdf"></i> CV</a></li>
                 <li><a href="https://www.linkedin.com/in/mathieu-petitbois-0940121b6/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
                 <li><a href="https://github.com/mathieu-petitbois" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
