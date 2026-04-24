@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Rounded square badge in accent blue -->
+  <rect x="2" y="2" width="60" height="60" rx="14" ry="14" fill="#2563eb"/>
+
+  <!-- Central "policy" node: one source point, low-left -->
+  <circle cx="20" cy="44" r="4.5" fill="#ffffff"/>
+
+  <!-- Three diverging paths, each ending in a "behavior" node.
+       Represents: one policy → diverse controllable behaviors.
+       Curves are different to emphasize diversity of outputs. -->
+
+  <!-- Path 1: gentle arc to upper-left -->
+  <path d="M 20 44 Q 16 30 22 18" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="22" cy="18" r="3.5" fill="#ffffff"/>
+
+  <!-- Path 2: sweeping arc to upper-middle -->
+  <path d="M 20 44 Q 30 28 36 14" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="36" cy="14" r="3.5" fill="#ffffff"/>
+
+  <!-- Path 3: longer arc to upper-right -->
+  <path d="M 20 44 Q 40 38 48 22" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="48" cy="22" r="3.5" fill="#ffffff"/>
+</svg>
