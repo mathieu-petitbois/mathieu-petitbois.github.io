@@ -23,6 +23,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Academicons for the Google Scholar mortarboard logo -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.4/css/academicons.min.css">
     
     <style>
         /* --- Modern CSS Variables --- */
@@ -115,6 +117,11 @@
             transition: all 0.2s;
         }
 
+        .scholar-btn i.ai-google-scholar {
+            color: #4285F4; /* Google blue, for the Scholar mortarboard */
+            font-size: 1.05rem;
+        }
+
         .scholar-btn:hover {
             background-color: var(--card-bg);
             color: var(--accent-color);
@@ -204,6 +211,64 @@
 
         nav a:hover i {
             transform: scale(1.1);
+        }
+
+        /* --- Social / identity icon row (CV, Scholar, LinkedIn, GitHub) ---
+           Sits under the nav, in the header. Compact circular icon buttons
+           with a tooltip on hover so the label is discoverable. */
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 18px 0 0 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .social-icons a {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-heading);
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            background-color: var(--accent-soft);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.08);
+        }
+
+        /* Tooltip on hover so users know what each icon is */
+        .social-icons a::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--text-heading);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .social-icons a:hover::after {
+            opacity: 1;
         }
 
         /* --- Publications --- */
@@ -378,6 +443,83 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
+        /* --- Mail pill: a two-part button ---
+           Left half is the mailto link, right half is the copy button.
+           They share a single rounded container with a visible divider
+           between them, and each half lights up independently on hover. */
+        .mail-pill {
+            display: inline-flex;
+            align-items: stretch;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .mail-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .mail-pill > a,
+        .mail-pill > button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            font: inherit;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        /* Left half — mailto link */
+        .mail-pill .mail-link {
+            color: var(--accent-color);
+            border-right: 1px solid var(--border-color);
+            text-decoration: none;
+        }
+
+        .mail-pill .mail-link:hover {
+            background-color: var(--accent-soft);
+        }
+
+        /* Right half — copy button */
+        .mail-pill .copy-btn {
+            color: var(--text-muted);
+        }
+
+        .mail-pill .copy-btn:hover {
+            background-color: #f1f5f9;
+            color: var(--accent-color);
+        }
+
+        .mail-pill .copy-btn.copied {
+            color: #16a34a;
+        }
+
+        /* Make sure mail-pill in the contact list overrides the
+           generic .contact-links a styling we apply to LinkedIn/GitHub */
+        .contact-links .mail-pill a,
+        .contact-links .mail-pill a:hover {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 0;
+            background-color: transparent;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .contact-links .mail-pill .mail-link {
+            border-right: 1px solid var(--border-color);
+        }
+
+        .contact-links .mail-pill .mail-link:hover {
+            background-color: var(--accent-soft);
+        }
+
         /* --- Footer --- */
         footer {
             text-align: center;
@@ -446,6 +588,7 @@
                             <li><a href="#publications"><i class="fas fa-book-open"></i> Publications</a></li>
                             <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
                             <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                            <li><a href="include/CV.pdf" target="_blank"><i class="fas fa-file-pdf"></i> CV</a></li>
                             <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
                         </ul>
                     </nav>
@@ -460,9 +603,9 @@
         <section id="publications">
             <div class="section-header-flex">
                 <h2><i class="fas fa-book-open"></i> Publications</h2>
-                
+
                 <a href="https://scholar.google.com/citations?user=Ohve_PcAAAAJ&hl=fr" target="_blank" class="scholar-btn">
-                    <i class="fab fa-google"></i> Google Scholar
+                    <i class="ai ai-google-scholar"></i> Google Scholar
                 </a>
             </div>
             
@@ -615,8 +758,16 @@
         <section id="contact">
             <h2><i class="fas fa-envelope"></i> Get In Touch</h2>
             <ul class="contact-links">
-                <li><a href="mailto:mathieupetitboispt@gmail.com"><i class="fas fa-envelope"></i> mathieupetitboispt@gmail.com</a></li>
-                <li><a href="include/CV.pdf" target="_blank"><i class="fas fa-file-pdf"></i> CV</a></li>
+                <li>
+                    <div class="mail-pill">
+                        <a href="mailto:mathieupetitboispt@gmail.com" class="mail-link">
+                            <i class="fas fa-envelope"></i> mathieupetitboispt@gmail.com
+                        </a>
+                        <button type="button" class="copy-btn" id="copyMailBtn" aria-label="Copy email address">
+                            <i class="far fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </li>
                 <li><a href="https://www.linkedin.com/in/mathieu-petitbois-0940121b6/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
                 <li><a href="https://github.com/mathieu-petitbois" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
             </ul>
@@ -629,5 +780,35 @@
             <p>© 2026 Mathieu Petitbois. Designed with <i class="fas fa-code"></i></p>
         </div>
     </footer>
+
+    <script>
+        // Copy-to-clipboard for the email address.
+        (function () {
+            const btn = document.getElementById('copyMailBtn');
+            const email = 'mathieupetitboispt@gmail.com';
+            if (!btn) return;
+
+            btn.addEventListener('click', async function () {
+                try {
+                    await navigator.clipboard.writeText(email);
+                } catch (err) {
+                    // Fallback for older browsers
+                    const ta = document.createElement('textarea');
+                    ta.value = email;
+                    document.body.appendChild(ta);
+                    ta.select();
+                    try { document.execCommand('copy'); } catch (_) {}
+                    document.body.removeChild(ta);
+                }
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.classList.add('copied');
+                setTimeout(function () {
+                    btn.innerHTML = originalHTML;
+                    btn.classList.remove('copied');
+                }, 1600);
+            });
+        })();
+    </script>
 </body>
 </html>
