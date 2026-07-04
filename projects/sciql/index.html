@@ -689,7 +689,7 @@ function buildMenu(){
 
   const envList = el("ul",{class:"menu-list"});
 
-  Object.keys(MANIFEST).sort().forEach(env=>{
+  Object.keys(MANIFEST).forEach(env=>{
     const col = el("li",{class:"menu-col"});
 
     const envRow = el("div",{class:"menu-item"});
@@ -824,11 +824,13 @@ function syncMenuChecksForAll(){
   Object.keys(MANIFEST).forEach(env => syncMenuChecksForEnv(env));
 }
 
-/* Render rows: 4 per row; captions **bold** "Label N" */
+/* Render rows: up to 3 videos per label group to avoid bulk downloads */
+const MAX_VIDEOS_PER_GROUP = 3;
+
 function render(){
   rowsContainer.innerHTML = "";
 
-  Array.from(selected.keys()).sort().forEach(env=>{
+  Object.keys(MANIFEST).filter(env => selected.has(env)).forEach(env=>{
     const labels = Array.from(selected.get(env)).sort();
     labels.forEach(label=>{
       const nums = MANIFEST[env][label] || [];
@@ -839,7 +841,7 @@ function render(){
       );
 
       const wrap = el("div",{class:"columns is-multiline is-variable is-3"});
-      nums.forEach(i=>{
+      nums.slice(0, MAX_VIDEOS_PER_GROUP).forEach(i=>{
         const col = el("div",{class:"column is-one-quarter-desktop is-half-tablet is-full-mobile video-col"});
         col.innerHTML = `
           <video autoplay muted loop playsinline controls>
@@ -858,9 +860,20 @@ function render(){
   }
 }
 
+/* Select only the first label per env to minimise initial video downloads */
+function selectFirstLabelPerEnv(){
+  selected.clear();
+  Object.entries(MANIFEST).forEach(([env, labelsObj])=>{
+    const firstLabel = Object.keys(labelsObj).sort()[0];
+    if(firstLabel) selected.set(env, new Set([firstLabel]));
+    syncMenuChecksForEnv(env);
+  });
+  render();
+}
+
 /* Init */
 buildMenu();
-selectAll();  // show everything by default
+selectFirstLabelPerEnv();
 
 /* Actions */
 displayAllBtn.addEventListener('click', selectAll);
